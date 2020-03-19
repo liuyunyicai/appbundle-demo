@@ -20,6 +20,7 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import com.google.android.play.core.internal.SoLoadCrashChecker
 import com.google.android.play.core.splitcompat.SplitCompat
 import java.util.Locale
 
@@ -33,6 +34,12 @@ class MyApplication : Application() {
         val ctx = LanguageHelper.getLanguageConfigurationContext(base)
         super.attachBaseContext(ctx)
         SplitCompat.install(this)
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+
+        SoLoadCrashChecker.test(this)
     }
 }
 
